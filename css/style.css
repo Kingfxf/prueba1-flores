@@ -1,97 +1,229 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;1,900&display=swap');
-*{
-    font-family: 'Poppins',cursive;
-}
-body{
-    color: azure;
-    width: 100%;
-    height: 82vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: black;
-    /* padding-top: -30; */
+
+* {
+  font-family: 'Poppins', cursive;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.botones{
-    padding: 9px;
-    border-radius: 80px;
-    background-color: transparent;
-    border: none;
+body {
+  background: black;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  overflow-x: hidden;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
 }
 
-.botones a{
-    background-color: #0a2be9;
-    padding: 9px;
-    border-radius: 80px;
-    -webkit-border-radius: 80px;
-    -moz-border-radius: 80px;
-    -ms-border-radius: 80px;
-    -o-border-radius: 80px;
-
+/* Contenedor de estrellas */
+.stars {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
 }
 
-.botones a:focus{
-    background-color: rgb(50, 194, 194);
+/* Cada estrella */
+.star {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.8;
+  animation-name: twinkle;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
 }
 
-.greetings{
-    font-size: 7rem;
-    font-weight: 900;
-}
-.greetings > span{
-    animation: glow 2.5s ease-in-out infinite;
-}
-@keyframes glow{
-    0%, 100%{
-        color: #fff;
-        text-shadow: 0 0 12px #39c6d6, 0 0 50px #39c6d6, 0 0 100px #39c6d6;
-    }
-    10%, 90%{
-        color: #111;
-        text-shadow: none;
-    }
-}
-.greetings > span:nth-child(2){
-    animation-delay: .2s ;
-}
-.greetings > span:nth-child(3){
-    animation-delay: .4s ;
-}
-.greetings > span:nth-child(4){
-    animation-delay: .6s;
-}
-.greetings > span:nth-child(5){
-    animation-delay: .8s;
-}
-.greetings > span:nth-child(6){
-    animation-delay: 1s;
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 0.2;
+  }
 }
 
-.description{
-    font-size: 1.5rem;
-    margin-bottom: 20px;
+/* Imágenes en las esquinas */
+.img-esquina {
+  position: fixed;
+  width: 80px;
+  border: 3px solid #ff69b4;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  transform: rotate(-5deg);
+  transition: transform 0.3s ease;
+  z-index: 10;
 }
 
-.button a{
-    text-decoration: none;
-    font-size: 1rem;
+.img-esquina.izquierda {
+  top: 20px;
+  left: 20px;
+}
+
+.img-esquina.derecha {
+  top: 20px;
+  right: 20px;
+}
+
+.img-esquina:hover {
+  transform: rotate(0deg) scale(1.1);
+}
+
+/* Título animado */
+.greetings {
+  font-size: 5rem;
+  font-weight: 900;
+  margin-top: 50px;
+  text-align: center;
+  text-shadow: 0 0 12px #39c6d6, 0 0 50px #39c6d6, 0 0 100px #39c6d6;
+  z-index: 5;
+}
+
+.greetings > span {
+  animation: glow 2.5s ease-in-out infinite;
+}
+
+@keyframes glow {
+  0%, 100% {
+    color: #fff;
+    text-shadow: 0 0 12px #39c6d6, 0 0 50px #39c6d6, 0 0 100px #39c6d6;
+  }
+  10%, 90% {
     color: #111;
+    text-shadow: none;
+  }
 }
 
-@media screen and (max-width:574px){
-    .greetings{
-        display: block;
-        font-size: 4rem;
-        font-weight: 800;
-        text-align: center;
-    }
-    .description{
-        font-size: 2rem;
-    }
-    
-    .button a{
-        font-size: 1rem;
-    }
+/* Corazón brillante grande y parpadeante */
+.corazon-brillante {
+  font-size: 6rem;
+  color: #ff69b4;
+  text-shadow:
+    0 0 10px #ff69b4,
+    0 0 20px #ff69b4,
+    0 0 30px #ff1493,
+    0 0 40px #ff1493,
+    0 0 50px #ff1493,
+    0 0 60px #ff1493;
+  animation: parpadeo 2s infinite;
+  margin: 20px 0 30px;
+  z-index: 5;
+  user-select: none;
+}
+
+@keyframes parpadeo {
+  0%, 100% {
+    opacity: 1;
+    text-shadow:
+      0 0 10px #ff69b4,
+      0 0 20px #ff69b4,
+      0 0 30px #ff1493,
+      0 0 40px #ff1493,
+      0 0 50px #ff1493,
+      0 0 60px #ff1493;
+  }
+  50% {
+    opacity: 0.6;
+    text-shadow:
+      0 0 5px #ff69b4,
+      0 0 10px #ff69b4,
+      0 0 15px #ff1493,
+      0 0 20px #ff1493,
+      0 0 25px #ff1493,
+      0 0 30px #ff1493;
+  }
+}
+
+/* Galería centrada con espacio entre imágenes */
+.galeria-centrada {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  max-width: 600px;
+  z-index: 5;
+}
+
+/* Estilo para cada imagen */
+.imagen-personalizada {
+  width: 90px;
+  border: 3px solid #ff69b4;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  transform: rotate(-5deg);
+  transition: transform 0.3s ease;
+}
+
+.imagen-personalizada:hover {
+  transform: rotate(0deg) scale(1.1);
+}
+
+/* Mensaje final */
+.mensaje-final {
+  margin-top: 30px;
+  font-size: 1.3rem;
+  text-align: center;
+  color: #fff0f5;
+  text-shadow: 0 0 8px #ff69b4;
+  max-width: 90%;
+  z-index: 5;
+}
+
+/* Botón */
+.button {
+  margin-top: 25px;
+  z-index: 5;
+}
+
+.botones {
+  padding: 10px 25px;
+  border-radius: 80px;
+  background-color: #0a2be9;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.botones a {
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.botones:hover {
+  background-color: rgb(50, 194, 194);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .greetings {
+    font-size: 3rem;
+  }
+
+  .corazon-brillante {
+    font-size: 4rem;
+  }
+
+  .imagen-personalizada {
+    width: 70px;
+  }
+
+  .img-esquina {
+    width: 50px;
+  }
+
+  .mensaje-final {
+    font-size: 1rem;
+  }
 }
