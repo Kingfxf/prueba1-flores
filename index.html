@@ -1,37 +1,314 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="icon" href="img/flowers.png" type="image/x-icon">
-    <title>Flores - Intecua</title>
-</head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="img/flowers.png" type="image/x-icon" />
+  <title>Flores - Intecua</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;1,900&display=swap');
 
+    * {
+      font-family: 'Poppins', cursive;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: black;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      overflow: hidden;
+      padding: 20px;
+      position: relative;
+    }
+
+    /* Fondo de estrellas */
+    .stars {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .star {
+      position: absolute;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.8;
+      animation-name: twinkle;
+      animation-iteration-count: infinite;
+      animation-timing-function: ease-in-out;
+    }
+
+    @keyframes twinkle {
+      0%, 100% {
+        opacity: 0.8;
+      }
+      50% {
+        opacity: 0.2;
+      }
+    }
+
+    /* Z-index para que los elementos estén por encima del fondo */
+    .img-esquina,
+    .greetings,
+    .corazon-brillante,
+    .galeria-centrada,
+    .mensaje-final,
+    .button {
+      position: relative;
+      z-index: 5;
+    }
+
+    /* Imágenes en las esquinas */
+    .img-esquina {
+      position: fixed;
+      width: 80px;
+      border: 3px solid #ff69b4;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      transform: rotate(-5deg);
+      transition: transform 0.3s ease;
+      z-index: 10;
+    }
+
+    .img-esquina.izquierda {
+      top: 20px;
+      left: 20px;
+    }
+
+    .img-esquina.derecha {
+      top: 20px;
+      right: 20px;
+    }
+
+    .img-esquina:hover {
+      transform: rotate(0deg) scale(1.1);
+    }
+
+    /* Título animado */
+    .greetings {
+      font-size: 5rem;
+      font-weight: 900;
+      margin-top: 50px;
+      text-align: center;
+      text-shadow: 0 0 12px #39c6d6, 0 0 50px #39c6d6, 0 0 100px #39c6d6;
+    }
+
+    .greetings > span {
+      animation: glow 2.5s ease-in-out infinite;
+    }
+
+    @keyframes glow {
+      0%, 100% {
+        color: #fff;
+        text-shadow: 0 0 12px #39c6d6, 0 0 50px #39c6d6, 0 0 100px #39c6d6;
+      }
+      10%, 90% {
+        color: #111;
+        text-shadow: none;
+      }
+    }
+
+    /* Corazón brillante */
+    .corazon-brillante {
+      font-size: 6rem;
+      color: #ff69b4;
+      text-shadow:
+        0 0 10px #ff69b4,
+        0 0 20px #ff69b4,
+        0 0 30px #ff1493,
+        0 0 40px #ff1493,
+        0 0 50px #ff1493,
+        0 0 60px #ff1493;
+      animation: parpadeo 2s infinite;
+      margin: 20px 0 30px;
+      user-select: none;
+    }
+
+    @keyframes parpadeo {
+      0%, 100% {
+        opacity: 1;
+        text-shadow:
+          0 0 10px #ff69b4,
+          0 0 20px #ff69b4,
+          0 0 30px #ff1493,
+          0 0 40px #ff1493,
+          0 0 50px #ff1493,
+          0 0 60px #ff1493;
+      }
+      50% {
+        opacity: 0.6;
+        text-shadow:
+          0 0 5px #ff69b4,
+          0 0 10px #ff69b4,
+          0 0 15px #ff1493,
+          0 0 20px #ff1493,
+          0 0 25px #ff1493,
+          0 0 30px #ff1493;
+      }
+    }
+
+    /* Galería centrada */
+    .galeria-centrada {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      max-width: 600px;
+    }
+
+    .imagen-personalizada {
+      width: 90px;
+      border: 3px solid #ff69b4;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      transform: rotate(-5deg);
+      transition: transform 0.3s ease;
+    }
+
+    .imagen-personalizada:hover {
+      transform: rotate(0deg) scale(1.1);
+    }
+
+    /* Mensaje final */
+    .mensaje-final {
+      margin-top: 30px;
+      font-size: 1.3rem;
+      text-align: center;
+      color: #fff0f5;
+      text-shadow: 0 0 8px #ff69b4;
+      max-width: 90%;
+    }
+
+    /* Botón */
+    .button {
+      margin-top: 25px;
+    }
+
+    .botones {
+      padding: 10px 25px;
+      border-radius: 80px;
+      background-color: #0a2be9;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .botones a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    .botones:hover {
+      background-color: rgb(50, 194, 194);
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .greetings {
+        font-size: 3rem;
+      }
+
+      .corazon-brillante {
+        font-size: 4rem;
+      }
+
+      .imagen-personalizada {
+        width: 70px;
+      }
+
+      .img-esquina {
+        width: 50px;
+      }
+
+      .mensaje-final {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
 <body>
-    <div class="greetings">
-        <span>M</span>
-        <span>I&emsp;</span>
-        <span> </span>
-        <span>P</span>
-        <span>E</span>
-        <span>Q</span>
-        <span>U</span>
-        <span>E</span>
-        <span>Ñ</span>
-        <span>A</span>
-    </div>
-    <div class="description">
-        <span>ESTE DETALLE ES PARA TI 🥺❤️ </span>
-    </div>
-    <div class="button">
-        <button class="botones">
-            <a href="flor.html" style="color: #fff;">CLICK AQUÍ</a>
-        </button>
-    </div>
+
+  <!-- Fondo estrellado -->
+  <div class="stars"></div>
+
+  <!-- Imágenes en esquinas -->
+  <img src="img/Camilu.png" alt="Camilu" class="img-esquina izquierda" />
+  <img src="img/King.png" alt="King" class="img-esquina derecha" />
+
+  <!-- Título animado -->
+  <div class="greetings">
+    <span></span>
+    <span>M</span>
+    <span>I&emsp;</span>
+    <span> </span>
+    <span>C</span>
+    <span>O</span>
+    <span>R</span>
+    <span>A</span>
+    <span>Z</span>
+    <span>O</span>
+    <span>N</span>
+    <span>❤️</span>
+  </div>
+
+  <!-- Corazón brillante -->
+  <div class="corazon-brillante">❤️</div>
+
+  <!-- Galería de imágenes -->
+  <div class="galeria-centrada">
+    <img src="img/Chibi.png" alt="Chibi" class="imagen-personalizada" />
+    <img src="img/FreeFire.png" alt="FreeFire" class="imagen-personalizada" />
+    <img src="img/Pantalla.png" alt="Pantalla" class="imagen-personalizada" />
+    <img src="img/Roblox.png" alt="Roblox" class="imagen-personalizada" />
+  </div>
+
+  <!-- Mensaje final -->
+  <span class="mensaje-final">Gracias por llegar a mi vida, este detalle es para ti 🥺❤️</span>
+
+  <!-- Botón -->
+  <div class="button">
+    <button class="botones">
+      <a href="flor.html">CLICK AQUÍ</a>
+    </button>
+  </div>
+
+  <!-- Script de estrellas -->
+  <script>
+    const starsContainer = document.querySelector('.stars');
+    const numStars = 150;
+
+    for (let i = 0; i < numStars; i++) {
+      const star = document.createElement('div');
+      star.classList.add('star');
+
+      const size = Math.random() * 2 + 1;
+      star.style.width = `${size}px`;
+      star.style.height = `${size}px`;
+
+      star.style.top = `${Math.random() * 100}vh`;
+      star.style.left = `${Math.random() * 100}vw`;
+
+      const duration = Math.random() * 3 + 2;
+      star.style.animationDuration = `${duration}s`;
+      star.style.animationDelay = `${Math.random() * 5}s`;
+
+      starsContainer.appendChild(star);
+    }
+  </script>
 
 </body>
-
 </html>
